@@ -1,11 +1,11 @@
 {
   "root": true,
   "api": {
-    "projectId": "PLACEHOLDER_ENV_VARIABLES_WILL_HANDLE_FOR_US",
-    "dataset": "PLACEHOLDER_ENV_VARIABLES_WILL_HANDLE_FOR_US"
+    "projectId": "oyqcoo6r",
+    "dataset": "production"
   },
   "project": {
-    "name": "Cody Olsen",
+    "name": "Patrick Simonsen",
     "basePath": "/studio"
   },
   "plugins": [
