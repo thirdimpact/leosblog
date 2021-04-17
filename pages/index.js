@@ -14,7 +14,7 @@ export default function Index({ allPosts, preview }) {
     <>
       <Layout preview={preview}>
         <Head>
-          <title>Cody Olsen</title>
+          <title>Patrick Simonsen</title>
         </Head>
         <Container>
           <Intro />
