@@ -27,7 +27,7 @@ gtag('config', '${ga}');
           )}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Carter+One&text=Cody%20Olsen"
+            href="https://fonts.googleapis.com/css2?family=Carter+One&text=Patrick%20Simonsen"
             rel="stylesheet"
           />
           <link
