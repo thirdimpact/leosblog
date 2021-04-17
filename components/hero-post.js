@@ -1,15 +1,15 @@
-import Avatar from "../components/avatar";
-import Date from "../components/date";
-import CoverImage from "../components/cover-image";
-import Link from "next/link";
+import Avatar from '../components/avatar'
+import Date from '../components/date'
+import CoverImage from '../components/cover-image'
+import Link from 'next/link'
 
 export default function HeroPost({
   title,
   coverImage,
   date,
   excerpt,
-  author,
   slug,
+  author,
 }) {
   return (
     <section>
@@ -33,10 +33,10 @@ export default function HeroPost({
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+          {excerpt && <p className="text-lg leading-relaxed mb-4">{excerpt}</p>}
           <Avatar name={author?.name} picture={author?.picture} />
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -7,8 +7,8 @@ import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
 
 export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+  const [heroPost, ...morePosts] = allPosts
+
   return (
     <>
       <Layout preview={preview}>
@@ -22,9 +22,8 @@ export default function Index({ allPosts, preview }) {
               title={heroPost.title}
               coverImage={heroPost.coverImage}
               date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
               excerpt={heroPost.excerpt}
+              slug={heroPost.slug}
             />
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
