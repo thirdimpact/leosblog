@@ -27,7 +27,7 @@ export default function Post({ post, morePosts, preview }) {
           <>
             <article>
               <Head>
-                <title>{post.title} | Cody Olsen</title>
+                <title>{post.title} | Patrick Simonsen</title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
               <PostHeader
