@@ -1,4 +1,5 @@
 {
+  "name": "leosblog",
   "scripts": {
     "dev": "next",
     "build": "npm run build:sanity && npm run build:web",
