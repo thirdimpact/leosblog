@@ -8,7 +8,7 @@ function Box(props) {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+  useFrame((state, delta) => (mesh.current.rotation.x += 0.02))
   // Return view, these are regular three.js elements expressed in JSX
   return (
     <mesh
@@ -20,7 +20,8 @@ function Box(props) {
       onPointerOut={(event) => setHover(false)}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      {/* <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} /> */}
+      <meshPhongMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }
@@ -32,6 +33,7 @@ export default function Threedeemagic() {
       <pointLight position={[10, 10, 10]} />
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
+      <Box position={[0, -1.2, 0]} />
     </Canvas>
   )
 }
