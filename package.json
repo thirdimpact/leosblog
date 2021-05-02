@@ -10,6 +10,7 @@
     "postinstall": "lerna bootstrap"
   },
   "dependencies": {
+    "@react-three/drei": "^4.3.3",
     "@react-three/fiber": "^6.0.19",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/client": "^2.0.9",
