@@ -4,6 +4,6 @@ const Threedeemagic = dynamic(() => import('../components/Threedeemagic'), {
   ssr: false,
 })
 
-export default function Threedeemagic() {
+export default function ThreedeemagicPage() {
   return <Threedeemagic />
 }
