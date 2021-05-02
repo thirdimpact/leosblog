@@ -1,6 +1,7 @@
 import React, { useRef, useState, Suspense } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { useGLTF, useTexture } from '@react-three/drei'
 
 function Box(props) {
   // This reference will give us direct access to the mesh
@@ -29,9 +30,37 @@ function Box(props) {
 }
 
 function Scene() {
-  const gltf = useGLTF('./assets/perfectCone.glb')
-  console.log(gltf)
-  return <primitive object={gltf.scene} />
+  const { nodes } = useGLTF('./assets/perfectCone.glb')
+  const [
+    colorMap,
+    displacementMap,
+    normalMap,
+    roughnessMap,
+    aoMap,
+  ] = useTexture([
+    './assets/PavingStones/PavingStones092_1K_Color.jpg',
+    './assets/PavingStones/PavingStones092_1K_Displacement.jpg',
+    './assets/PavingStones/PavingStones092_1K_Normal.jpg',
+    './assets/PavingStones/PavingStones092_1K_Roughness.jpg',
+    './assets/PavingStones/PavingStones092_1K_AmbientOcclusion.jpg',
+  ])
+  return (
+    <mesh
+      castShadow
+      receiveShadow
+      geometry={nodes.Cone.geometry}
+      position={[0, 0, -5]}
+    >
+      <meshStandardMaterial
+        displacementScale={0.2}
+        map={colorMap}
+        displacementMap={displacementMap}
+        normalMap={normalMap}
+        roughnessMap={roughnessMap}
+        aoMap={aoMap}
+      />
+    </mesh>
+  )
 }
 
 export default function Threedeemagic() {
