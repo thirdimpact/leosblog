@@ -7,7 +7,7 @@ function useDimensions() {
     x: typeof window !== 'undefined' ? window.innerWidth : 0,
     y: typeof window !== 'undefined' ? window.innerHeight : 0,
   })
-  React.useEffect(
+  React.useLayoutEffect(
     function () {
       let frame
       function handleResize() {
