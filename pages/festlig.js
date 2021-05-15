@@ -60,7 +60,10 @@ export default function Festlig() {
   return (
     <div
       className="flex items-center justify-center min-h-screen"
-      style={{ width: x + 'px', height: y + 'px' }}
+      style={{
+        width: typeof window !== 'undefined' ? x + 'px' : undefined,
+        height: typeof window !== 'undefined' ? y + 'px' : undefined,
+      }}
     >
       {!partyTime && (
         <Button
