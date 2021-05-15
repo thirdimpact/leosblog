@@ -1,6 +1,8 @@
 import React from 'react'
 import Confetti from 'react-confetti'
 
+console.log('Hello, world!')
+
 function useDimensions() {
   const [size, setSize] = React.useState({
     x: typeof window !== 'undefined' ? window.innerWidth : 0,
