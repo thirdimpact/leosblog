@@ -1,6 +1,41 @@
 import React from 'react'
 import Confetti from 'react-confetti'
 
+function useDimensions() {
+  const [slow, setSlow] = React.useState(true)
+  const [size, setSize] = React.useState({
+    x: typeof window !== 'undefined' ? window.innerWidth : 0,
+    y: typeof window !== 'undefined' ? window.innerHeight : 0,
+  })
+  React.useEffect(
+    function () {
+      let frame
+      function handleResize() {
+        if (slow) {
+          setSize({
+            x: window.innerWidth,
+            y: window.innerHeight,
+          })
+        } else {
+          cancelAnimationFrame(frame)
+          frame = requestAnimationFrame(function () {
+            setSize({
+              x: window.innerWidth,
+              y: window.innerHeight,
+            })
+          })
+        }
+      }
+      window.addEventListener('resize', handleResize, false)
+      return function () {
+        window.removeEventListener('resize', handleResize, false)
+      }
+    },
+    [setSize]
+  )
+  return [size, slow, setSlow]
+}
+
 function Konfetti() {
   return (
     <div className="fixed top-0 left-0 bottom-0 right-0 z-50 pointer-events-none transform-gpu">
@@ -19,9 +54,14 @@ function Button(props) {
 }
 
 export default function Festlig() {
+  const [{ x, y }, slow, setSlow] = useDimensions()
+  console.log({ x, y })
   const [partyTime, setPartyTime] = React.useState(false)
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div
+      className="flex items-center justify-center min-h-screen"
+      style={{ width: x + 'px', height: y + 'px' }}
+    >
       {!partyTime && (
         <Button
           onClick={function () {
@@ -41,6 +81,26 @@ export default function Festlig() {
             Dra hjem
           </Button>
           <Konfetti />
+        </>
+      )}
+      {slow && (
+        <Button
+          onClick={function () {
+            setSlow(false)
+          }}
+        >
+          Gotta go fast!
+        </Button>
+      )}
+      {!slow && (
+        <>
+          <Button
+            onClick={function () {
+              setSlow(true)
+            }}
+          >
+            Chili dogs
+          </Button>
         </>
       )}
     </div>
