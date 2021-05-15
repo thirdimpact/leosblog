@@ -11,20 +11,13 @@ function useDimensions() {
     function () {
       let frame
       function handleResize() {
-        if (slow) {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(function () {
           setSize({
             x: window.innerWidth,
             y: window.innerHeight,
           })
-        } else {
-          cancelAnimationFrame(frame)
-          frame = requestAnimationFrame(function () {
-            setSize({
-              x: window.innerWidth,
-              y: window.innerHeight,
-            })
-          })
-        }
+        })
       }
       window.addEventListener('resize', handleResize, false)
       return function () {
@@ -33,13 +26,14 @@ function useDimensions() {
     },
     [setSize]
   )
-  return [size, slow, setSlow]
+  return size
 }
 
 function Konfetti() {
+  const { x, y } = useDimensions()
   return (
     <div className="fixed top-0 left-0 bottom-0 right-0 z-50 pointer-events-none transform-gpu">
-      <Confetti width={window.innerWidth} height={window.innerheight} />
+      <Confetti width={x} height={y} />
     </div>
   )
 }
@@ -54,17 +48,9 @@ function Button(props) {
 }
 
 export default function Festlig() {
-  const [{ x, y }, slow, setSlow] = useDimensions()
-  console.log({ x, y })
   const [partyTime, setPartyTime] = React.useState(false)
   return (
-    <div
-      className="flex items-center justify-center min-h-screen"
-      style={{
-        width: typeof window !== 'undefined' ? x + 'px' : undefined,
-        height: typeof window !== 'undefined' ? y + 'px' : undefined,
-      }}
-    >
+    <div className="flex items-center justify-center min-h-screen">
       {!partyTime && (
         <Button
           onClick={function () {
@@ -84,26 +70,6 @@ export default function Festlig() {
             Dra hjem
           </Button>
           <Konfetti />
-        </>
-      )}
-      {slow && (
-        <Button
-          onClick={function () {
-            setSlow(false)
-          }}
-        >
-          Gotta go fast!
-        </Button>
-      )}
-      {!slow && (
-        <>
-          <Button
-            onClick={function () {
-              setSlow(true)
-            }}
-          >
-            Chili dogs
-          </Button>
         </>
       )}
     </div>
